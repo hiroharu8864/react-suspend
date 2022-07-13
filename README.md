@@ -1,2 +1,1 @@
-# react-suspend
-Created with CodeSandbox
+## sampleCode
