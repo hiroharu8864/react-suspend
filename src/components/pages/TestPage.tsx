@@ -1,5 +1,8 @@
 import { FC, memo, Suspense, useState } from "react";
 
+import { RenderingNotifier } from "../hooks/RenderingNotifier";
+import { getData } from "../hooks/getData";
+
 export const TestPage: FC = memo(() => {
   /**
    * Promiseは非同期処理を表すオブジェクトのこと。
@@ -26,13 +29,18 @@ export const TestPage: FC = memo(() => {
   };
 
   const [count, setCount] = useState(0);
+  const { data } = getData;
+  console.log(data);
 
   return (
     <>
       <h2>コンポーネント読み込みテスト</h2>
+      <p> Data is {data} </p>
+      <RenderingNotifier name="outside-Suspense" />
       <Suspense fallback={<p>悪質な広告ページ</p>}>
         {/* <AlwaysSuspend /> */}
         <SometimesSuspend />
+        <RenderingNotifier name="inside-Suspense" />
         <button onClick={() => setCount((c) => c + 1)}>{count}</button>
       </Suspense>
     </>
